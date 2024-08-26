@@ -2,56 +2,19 @@ package operating_cash
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"net/http"
 
-	go_json "github.com/goccy/go-json"
-	"github.com/gofiber/fiber/v2"
+	"github.com/garrettladley/garrettladley/subs/reports/pkg/dts/request"
 )
 
-func query(ctx context.Context, params params) (response, error) {
+func query(ctx context.Context, params params) (resp response, err error) {
 	requestURL, err := params.build()
 	if err != nil {
-		return response{}, fmt.Errorf("failed to build request URL: %w", err)
+		return resp, fmt.Errorf("failed to build request URL: %w", err)
 	}
 
-	agent := fiber.
-		Get(requestURL.String()).
-		JSONDecoder(go_json.Unmarshal)
+	err = request.WithContext(ctx, http.MethodGet, requestURL, nil, &resp)
 
-	resultCh := make(chan result)
-
-	go func() {
-		var resp response
-		statusCode, _, errs := agent.Struct(&resp)
-		if len(errs) > 0 {
-			resultCh <- result{response{}, fmt.Errorf("failed to make request: %w", errors.Join(errs...))}
-			close(resultCh)
-			return
-		}
-
-		if statusCode != http.StatusOK {
-			resultCh <- result{response{}, fmt.Errorf("received status code: %d", statusCode)}
-			close(resultCh)
-			return
-		}
-
-		resultCh <- result{resp, nil}
-		close(resultCh)
-	}()
-
-	for {
-		select {
-		case <-ctx.Done():
-			return response{}, ctx.Err()
-		case res := <-resultCh:
-			return res.response, res.err
-		}
-	}
-}
-
-type result struct {
-	response response
-	err      error
+	return
 }
