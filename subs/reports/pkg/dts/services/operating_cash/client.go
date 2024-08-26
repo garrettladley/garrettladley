@@ -11,13 +11,14 @@ import (
 )
 
 func query(ctx context.Context, params params) (response, error) {
-	requestUrl, err := params.build()
+	requestURL, err := params.build()
 	if err != nil {
 		return response{}, fmt.Errorf("failed to build request URL: %w", err)
 	}
 
-	agent := fiber.Get(requestUrl.String())
-	agent.JSONDecoder(go_json.Unmarshal)
+	agent := fiber.
+		Get(requestURL.String()).
+		JSONDecoder(go_json.Unmarshal)
 
 	resultCh := make(chan result)
 
