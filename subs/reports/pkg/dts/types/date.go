@@ -4,7 +4,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/garrettladley/left-arrow/subs/reports/pkg/dts/constants"
+	"github.com/garrettladley/garrettladley/subs/reports/pkg/dts/constants"
 )
 
 type Date time.Time

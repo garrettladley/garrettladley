@@ -5,7 +5,7 @@ import (
 	"log/slog"
 	"time"
 
-	"github.com/garrettladley/left-arrow/subs/reports/pkg/dts/services/operating_cash"
+	"github.com/garrettladley/garrettladley/subs/reports/pkg/dts/services/operating_cash"
 )
 
 func main() {

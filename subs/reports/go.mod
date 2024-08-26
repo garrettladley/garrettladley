@@ -1,4 +1,4 @@
-module github.com/garrettladley/left-arrow/subs/reports
+module github.com/garrettladley/garrettladley/subs/reports
 
 go 1.22.4
 
