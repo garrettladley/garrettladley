@@ -2,11 +2,14 @@ package operating_cash
 
 import (
 	"fmt"
+	"net/url"
+	"strconv"
 	"strings"
 	"time"
 
 	"github.com/garrettladley/left-arrow/subs/reports/pkg/dts/constants"
 	"github.com/garrettladley/left-arrow/subs/reports/pkg/dts/types"
+	"github.com/garrettladley/left-arrow/subs/reports/pkg/dts/utilities"
 )
 
 type response struct {
@@ -49,6 +52,57 @@ type params struct {
 	Sorts      []sort // Sorts are applied in the order they are specified
 	PageSize   int
 	PageNumber int
+}
+
+func (p *params) build() (*url.URL, error) {
+	queryParams := utilities.URLValues{}
+
+	if len(p.Fields) > 0 {
+		queryParams.Add("fields", strings.Join(p.Fields, ","))
+	}
+
+	if len(p.Filters) > 0 {
+		filterStrings := make([]string, len(p.Filters))
+		for i, f := range p.Filters {
+			if len(f.Value) == 0 {
+				continue
+			}
+			filterStrings[i] = f.string()
+		}
+		if len(filterStrings) > 0 {
+			queryParams.Add("filter", strings.Join(filterStrings, ","))
+		}
+	}
+
+	if len(p.Sorts) > 0 {
+		sortStrings := make([]string, len(p.Sorts))
+		for i, s := range p.Sorts {
+			if len(s.Field) == 0 {
+				continue
+			}
+			sortStrings[i] = s.string()
+		}
+		if len(sortStrings) > 0 {
+			queryParams.Add("sort", strings.Join(sortStrings, ","))
+		}
+	}
+
+	if p.PageSize > 0 {
+		queryParams.Add("page[size]", strconv.Itoa(p.PageSize))
+	}
+
+	if p.PageNumber > 0 {
+		queryParams.Add("page[number]", strconv.Itoa(p.PageNumber))
+	}
+
+	requestURL, err := url.Parse(fmt.Sprintf("%s%s", constants.BASE_URL, constants.DEPOSITS_AND_WITHDRAWALS_OF_OPERATING_CASH_URL))
+	if err != nil {
+		return nil, fmt.Errorf("failed to parse URL: %w", err)
+	}
+
+	requestURL.RawQuery = queryParams.Encode()
+
+	return requestURL, nil
 }
 
 type filterModifier string
