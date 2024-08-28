@@ -5,12 +5,26 @@ import (
 	"log/slog"
 	"time"
 
+	"github.com/garrettladley/garrettladley/subs/reports/pkg/dts/builder"
 	"github.com/garrettladley/garrettladley/subs/reports/pkg/dts/services/operating_cash"
 )
 
 func main() {
-	start := time.Date(2024, time.August, 22, 0, 0, 0, 0, time.UTC)
-	end := time.Date(2024, time.August, 23, 0, 0, 0, 0, time.UTC)
+	start := builder.
+		NewDate().
+		Day(22).
+		Month(time.August).
+		Year(2024).
+		Loc(time.UTC).
+		Build()
+
+	end := builder.
+		NewDate().
+		Day(23).
+		Month(time.August).
+		Year(2024).
+		Loc(time.UTC).
+		Build()
 
 	resp, err := operating_cash.Query(context.Background(), start, end)
 
