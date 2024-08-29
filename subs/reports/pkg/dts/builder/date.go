@@ -58,7 +58,27 @@ func (d *Date) MustBuild() time.Time {
 	)
 }
 
-// Build will return ErrMissingLocation if d.loc is nil
+// MustBuild builds the time.Time represented by the Date by calling
+// time.Date
+//
+// Date returns the Time corresponding to
+//
+//	yyyy-mm-dd hh:mm:ss + nsec nanoseconds
+//
+// in the appropriate zone for that time in the given location.
+//
+// The month, day, hour, min, sec, and nsec values may be outside
+// their usual ranges and will be normalized during the conversion.
+// For example, October 32 converts to November 1.
+//
+// A daylight savings time transition skips or repeats times.
+// For example, in the United States, March 13, 2011 2:15am never occurred,
+// while November 6, 2011 1:15am occurred twice. In such cases, the
+// choice of time zone, and therefore the time, is not well-defined.
+// Date returns a time that is correct in one of the two zones involved
+// in the transition, but it does not guarantee which.
+//
+// Build will return ErrMissingLocation if d.loc is nil.
 func (d *Date) Build() (time.Time, error) {
 	if d.loc == nil {
 		return time.Time{}, ErrMissingLocation
