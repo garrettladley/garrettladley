@@ -1,6 +1,9 @@
 package builder
 
-import "time"
+import (
+	"errors"
+	"time"
+)
 
 // Builder to wrap time.Date
 //
@@ -21,7 +24,8 @@ func NewDate() *Date {
 	return &Date{}
 }
 
-// Builds the time.Time represented by the Date by calling time.Date
+// MustBuild builds the time.Time represented by the Date by calling
+// time.Date
 //
 // Date returns the Time corresponding to
 //
@@ -40,8 +44,8 @@ func NewDate() *Date {
 // Date returns a time that is correct in one of the two zones involved
 // in the transition, but it does not guarantee which.
 //
-// Build panics if d.loc is nil.
-func (d *Date) Build() time.Time {
+// MustBuild panics if d.loc is nil.
+func (d *Date) MustBuild() time.Time {
 	return time.Date(
 		d.year,
 		d.month,
@@ -52,6 +56,24 @@ func (d *Date) Build() time.Time {
 		d.nsec,
 		d.loc,
 	)
+}
+
+// Build will return ErrMissingLocation if d.loc is nil
+func (d *Date) Build() (time.Time, error) {
+	if d.loc == nil {
+		return time.Time{}, ErrMissingLocation
+	}
+
+	return time.Date(
+		d.year,
+		d.month,
+		d.day,
+		d.hour,
+		d.min,
+		d.sec,
+		d.nsec,
+		d.loc,
+	), nil
 }
 
 func (d *Date) Year(year int) *Date {
@@ -93,3 +115,7 @@ func (d *Date) Loc(loc *time.Location) *Date {
 	d.loc = loc
 	return d
 }
+
+var (
+	ErrMissingLocation = errors.New("time: missing Location in call to Date")
+)

@@ -16,7 +16,7 @@ func main() {
 		Month(time.August).
 		Year(2024).
 		Loc(time.UTC).
-		Build()
+		MustBuild()
 
 	end := builder.
 		NewDate().
@@ -24,7 +24,7 @@ func main() {
 		Month(time.August).
 		Year(2024).
 		Loc(time.UTC).
-		Build()
+		MustBuild()
 
 	resp, err := operating_cash.Query(context.Background(), start, end)
 
