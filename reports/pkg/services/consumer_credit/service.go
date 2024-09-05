@@ -10,10 +10,11 @@ import (
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/garrettladley/garrettladley/reports/pkg/constants"
+	"github.com/garrettladley/garrettladley/reports/pkg/types"
 	"github.com/gofiber/fiber/v2"
 )
 
-func Query(ctx context.Context, start time.Time, end time.Time) error {
+func Query(ctx context.Context, start time.Time, end time.Time) ([]Data, error) {
 	resultCh := make(chan []byte)
 	errCh := make(chan error)
 
@@ -40,9 +41,9 @@ func Query(ctx context.Context, start time.Time, end time.Time) error {
 	for !done {
 		select {
 		case <-ctx.Done():
-			return ctx.Err()
+			return []Data{}, ctx.Err()
 		case err := <-errCh:
-			return err
+			return []Data{}, err
 		case body = <-resultCh:
 			done = true
 			break
@@ -51,22 +52,14 @@ func Query(ctx context.Context, start time.Time, end time.Time) error {
 
 	doc, err := goquery.NewDocumentFromReader(bytes.NewReader(body))
 	if err != nil {
-		return err
+		return []Data{}, err
 	}
 
-	// 1943
 	now := time.Now()
-	data := make([]Data, (now.Year()-constants.CONSUMER_CREDIT_START)*4+whatQuarter(now).into())
-	fmt.Println(data) // remove unused
+	data := make([]Data, (now.Year()-constants.CONSUMER_CREDIT_START)*4+types.QuarterFromTime(now).Int()-1)
 	doc.Find("#content > div.data-table > table > tbody > tr").Each(func(i int, s *goquery.Selection) {
-		text := s.Text() // text is a string
-		fmt.Printf("Row %d: '%v'\n", i+1, text)
-
-		// for i, r := range text {
-		// 	fmt.Printf("Rune at %d: %c\n", i, r)
-		// }
-
+		data[i] = parse(s.Text())
 	})
 
-	return nil
+	return data, nil
 }

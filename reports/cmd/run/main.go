@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"log/slog"
 	"time"
 
@@ -31,13 +30,7 @@ func main() {
 
 	// slog.Info("query", "resp", resp, "err", err)
 
-	err := consumer_credit.Query(context.Background(), start, end)
+	data, err := consumer_credit.Query(context.Background(), start, end)
 
-	slog.Info("consumer_credit", "resp", "", "err", err)
-
-	fmt.Println(consumer_credit.TimeSeriesFrom(`
-        2024 Q2
-        1,744,342.61
-        1,565,116.90
-      `))
+	slog.Info("consumer_credit", "data", data, "err", err)
 }
