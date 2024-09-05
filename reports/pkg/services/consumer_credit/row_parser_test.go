@@ -6,7 +6,7 @@ import (
 	"github.com/garrettladley/garrettladley/reports/pkg/types"
 )
 
-func TestTimeSeriesFrom(t *testing.T) {
+func TestParse(t *testing.T) {
 	t.Parallel()
 
 	s := `

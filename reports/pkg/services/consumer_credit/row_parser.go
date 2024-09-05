@@ -17,26 +17,28 @@ type parser struct {
 }
 
 func parse(s string) Data {
-	return parser{s: s, n: len(s)}.parseData()
+	p := parser{s: s, n: len(s)}
+	return p.parseData()
 }
 
-func (p parser) parseData() (data Data) {
+func (p parser) parseData() Data {
 	qDate := parseDate(p.s)
 
 	studentLoansData := p.parseFloat(25)
-	data.StudentLoans = types.TimeSeries{
-		QuarterDate: qDate,
-		Data:        studentLoansData,
-	}
 
 	motorVehicleStart := p.readUntil(p.s, p.read, func(r byte) bool { return unicode.IsDigit(rune(r)) })
 	motorVehicleLoansData := p.parseFloat(motorVehicleStart)
-	data.MotorVehicleLoans = types.TimeSeries{
-		QuarterDate: qDate,
-		Data:        motorVehicleLoansData,
-	}
 
-	return
+	return Data{
+		StudentLoans: types.TimeSeries{
+			QuarterDate: qDate,
+			Data:        studentLoansData,
+		},
+		MotorVehicleLoans: types.TimeSeries{
+			QuarterDate: qDate,
+			Data:        motorVehicleLoansData,
+		},
+	}
 }
 
 func (p *parser) parseFloat(start int) float32 {
