@@ -7,6 +7,7 @@ import (
 
 	"github.com/garrettladley/garrettladley/common/pkg/builder"
 	"github.com/garrettladley/garrettladley/reports/pkg/services/consumer_credit"
+	"github.com/garrettladley/garrettladley/reports/pkg/services/operating_cash"
 )
 
 func main() {
@@ -26,9 +27,9 @@ func main() {
 		Loc(time.UTC).
 		MustBuild()
 
-	// resp, err := operating_cash.Query(context.Background(), start, end)
+	resp, err := operating_cash.Query(context.Background(), start, end)
 
-	// slog.Info("query", "resp", resp, "err", err)
+	slog.Info("query", "resp", resp, "err", err)
 
 	data, err := consumer_credit.Query(context.Background(), start, end)
 
