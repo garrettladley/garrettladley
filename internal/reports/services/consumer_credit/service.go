@@ -9,8 +9,8 @@ import (
 	"time"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/garrettladley/garrettladley/reports/pkg/constants"
-	"github.com/garrettladley/garrettladley/reports/pkg/types"
+	"github.com/garrettladley/garrettladley/internal/reports/constants"
+	"github.com/garrettladley/garrettladley/internal/reports/types"
 	"github.com/gofiber/fiber/v2"
 )
 

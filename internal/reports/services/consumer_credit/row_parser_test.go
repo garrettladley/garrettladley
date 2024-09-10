@@ -3,7 +3,7 @@ package consumer_credit
 import (
 	"testing"
 
-	"github.com/garrettladley/garrettladley/reports/pkg/types"
+	"github.com/garrettladley/garrettladley/internal/reports/types"
 )
 
 func TestParse(t *testing.T) {

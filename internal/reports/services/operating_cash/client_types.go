@@ -7,9 +7,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/garrettladley/garrettladley/common/pkg/utilities"
-	"github.com/garrettladley/garrettladley/reports/pkg/constants"
-	"github.com/garrettladley/garrettladley/reports/pkg/types"
+	"github.com/garrettladley/garrettladley/internal/reports/constants"
+	"github.com/garrettladley/garrettladley/internal/reports/types"
+	"github.com/garrettladley/garrettladley/pkg/utilities"
 )
 
 type response struct {

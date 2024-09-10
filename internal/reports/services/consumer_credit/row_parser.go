@@ -7,7 +7,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/garrettladley/garrettladley/reports/pkg/types"
+	"github.com/garrettladley/garrettladley/internal/reports/types"
 )
 
 type parser struct {

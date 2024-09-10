@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/garrettladley/garrettladley/common/pkg/request"
+	"github.com/garrettladley/garrettladley/pkg/request"
 )
 
 func query(ctx context.Context, params params) (resp response, err error) {

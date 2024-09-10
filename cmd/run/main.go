@@ -5,9 +5,9 @@ import (
 	"log/slog"
 	"time"
 
-	"github.com/garrettladley/garrettladley/common/pkg/builder"
-	"github.com/garrettladley/garrettladley/reports/pkg/services/consumer_credit"
-	"github.com/garrettladley/garrettladley/reports/pkg/services/operating_cash"
+	"github.com/garrettladley/garrettladley/internal/reports/services/consumer_credit"
+	"github.com/garrettladley/garrettladley/internal/reports/services/operating_cash"
+	"github.com/garrettladley/garrettladley/pkg/builder"
 )
 
 func main() {

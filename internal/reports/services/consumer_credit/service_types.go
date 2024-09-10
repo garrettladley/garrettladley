@@ -1,7 +1,7 @@
 package consumer_credit
 
 import (
-	"github.com/garrettladley/garrettladley/reports/pkg/types"
+	"github.com/garrettladley/garrettladley/internal/reports/types"
 )
 
 type Data struct {
