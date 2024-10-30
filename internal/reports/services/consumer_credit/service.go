@@ -22,7 +22,7 @@ func Query(ctx context.Context, start time.Time, end time.Time) ([]Data, error) 
 		defer close(resultCh)
 		defer close(errCh)
 
-		statusCode, body, errs := fiber.Get(constants.CONSUMER_CREDIT).Bytes()
+		statusCode, body, errs := fiber.Get(constants.ConsumerCreditURL).Bytes()
 		if errs != nil {
 			errCh <- fmt.Errorf("failed to get consumer credit endpoint: %w ", errors.Join(errs...))
 			return
@@ -56,7 +56,7 @@ func Query(ctx context.Context, start time.Time, end time.Time) ([]Data, error) 
 	}
 
 	now := time.Now()
-	data := make([]Data, (now.Year()-constants.CONSUMER_CREDIT_START)*4+types.QuarterFromTime(now).Int()-1)
+	data := make([]Data, (now.Year()-int(constants.ConsumerCreditStart))*4+types.QuarterFromTime(now).Int()-1)
 	doc.Find("#content > div.data-table > table > tbody > tr").Each(func(i int, s *goquery.Selection) {
 		data[i] = parse(s.Text())
 	})

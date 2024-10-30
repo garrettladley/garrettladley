@@ -6,11 +6,12 @@ import (
 	"time"
 )
 
-func Query(ctx context.Context, start time.Time, end time.Time, fields ...string) (Response, error) {
+func Query(ctx context.Context, start time.Time, end time.Time, fields ...string) (resp Response, err error) {
 	res, err := query(ctx, params{Filters: []filter{after(start), before(end), xfields(fields...)}})
 	if err != nil {
-		return Response{}, fmt.Errorf("failed to query operating cash: %w", err)
+		return resp, fmt.Errorf("failed to query operating cash: %w", err)
 	}
 
-	return into(res), nil
+	resp = into(res)
+	return
 }

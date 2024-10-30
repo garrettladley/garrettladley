@@ -11,7 +11,7 @@ type Date time.Time
 
 func (d *Date) UnmarshalJSON(b []byte) error {
 	s := strings.Trim(string(b), "\"")
-	t, err := time.Parse(constants.YYYY_MM_DD, s)
+	t, err := time.Parse(constants.TimeLayout, s)
 	if err != nil {
 		return err
 	}

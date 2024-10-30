@@ -95,7 +95,7 @@ func (p *params) build() (*url.URL, error) {
 		queryParams.Add("page[number]", strconv.Itoa(p.PageNumber))
 	}
 
-	requestURL, err := url.Parse(fmt.Sprintf("%s%s", constants.BASE_URL, constants.DEPOSITS_AND_WITHDRAWALS_OF_OPERATING_CASH_URL))
+	requestURL, err := url.Parse(fmt.Sprintf("%s%s", constants.BaseURL, constants.DepositsAndWithdrawalsOfOperatingCashURL))
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse URL: %w", err)
 	}
@@ -130,7 +130,7 @@ func before(value time.Time) filter {
 	return filter{
 		Field:    "record_date",
 		Modifier: filterModifierLessThanOrEqual,
-		Value:    value.Format(constants.YYYY_MM_DD),
+		Value:    value.Format(constants.TimeLayout),
 	}
 }
 
@@ -138,7 +138,7 @@ func after(value time.Time) filter {
 	return filter{
 		Field:    "record_date",
 		Modifier: filterModifierGreaterThanOrEqual,
-		Value:    value.Format(constants.YYYY_MM_DD),
+		Value:    value.Format(constants.TimeLayout),
 	}
 }
 

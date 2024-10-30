@@ -1,0 +1,22 @@
+ingress:
+  rules:
+  - component:
+      name: garrettladley
+    match:
+      path:
+        prefix: /
+name: garrettladley
+region: nyc
+services:
+- dockerfile_path: Dockerfile
+  github:
+    branch: main
+    deploy_on_push: true
+    repo: garrettladley/garrettladley
+  health_check:
+    http_path: /health
+  http_port: 8080
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  name: garrettladley
+  source_dir: .
