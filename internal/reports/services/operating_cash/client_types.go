@@ -142,6 +142,7 @@ func after(value time.Time) filter {
 	}
 }
 
+// nolint:unused
 func in(values ...string) filter {
 	return filter{
 		Field:    "record_date",

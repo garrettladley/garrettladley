@@ -136,6 +136,4 @@ func (d *Date) Loc(loc *time.Location) *Date {
 	return d
 }
 
-var (
-	ErrMissingLocation = errors.New("time: missing Location in call to Date")
-)
+var ErrMissingLocation = errors.New("time: missing Location in call to Date")

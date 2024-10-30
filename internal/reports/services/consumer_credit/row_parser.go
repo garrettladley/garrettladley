@@ -65,6 +65,7 @@ func (p *parser) parseFloat(start int) float32 {
 
 	return 0.0
 }
+
 func (p *parser) readUntil(s string, startIdx int, pred func(r byte) bool) (endIdx int) {
 	for idx := startIdx; idx < p.n; idx++ {
 		if pred(s[idx]) {
