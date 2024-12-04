@@ -1,3 +1,6 @@
+//go:build prod
+// +build prod
+
 package ai
 
 import (
@@ -5,7 +8,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/garrettladley/garrettladley/internal/is/predicate"
+	"github.com/garrettladley/garrettladley/internal/api/is/predicate"
 )
 
 func (c *Client) Is(ctx context.Context, n int64, p predicate.Predicate) (bool, error) {

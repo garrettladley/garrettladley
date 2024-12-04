@@ -1,7 +1,7 @@
 package odd
 
 import (
-	is "github.com/garrettladley/garrettladley/internal/is/ai"
+	is "github.com/garrettladley/garrettladley/internal/api/is/ai"
 	"github.com/garrettladley/garrettladley/pkg/ai"
 )
 

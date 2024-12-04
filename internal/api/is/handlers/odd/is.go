@@ -1,9 +1,9 @@
-package even
+package odd
 
 import (
 	"strconv"
 
-	"github.com/garrettladley/garrettladley/internal/is/predicate"
+	"github.com/garrettladley/garrettladley/internal/api/is/predicate"
 	"github.com/garrettladley/garrettladley/pkg/xerr"
 	"github.com/gofiber/fiber/v2"
 )
@@ -15,12 +15,12 @@ func (s *Service) Is(c *fiber.Ctx) error {
 	}
 	var result bool
 	if c.QueryBool("ai", false) {
-		result, err = s.client.Is(c.Context(), n, predicate.Even)
+		result, err = s.client.Is(c.Context(), n, predicate.Odd)
 		if err != nil {
 			return err
 		}
 	} else {
-		result = n%2 == 0
+		result = n%2 != 0
 	}
-	return c.Status(fiber.StatusOK).JSON(fiber.Map{"is_even": result})
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{"is_odd": result})
 }

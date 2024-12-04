@@ -1,8 +1,8 @@
 package server
 
 import (
-	"github.com/garrettladley/garrettladley/internal/is/handlers/even"
-	"github.com/garrettladley/garrettladley/internal/is/handlers/odd"
+	"github.com/garrettladley/garrettladley/internal/api/is/handlers/even"
+	"github.com/garrettladley/garrettladley/internal/api/is/handlers/odd"
 	"github.com/gofiber/fiber/v2"
 )
 

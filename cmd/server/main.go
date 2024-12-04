@@ -7,8 +7,8 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/garrettladley/garrettladley/internal/is/server"
-	"github.com/garrettladley/garrettladley/internal/is/settings"
+	"github.com/garrettladley/garrettladley/internal/api/is/server"
+	"github.com/garrettladley/garrettladley/internal/api/is/settings"
 	"github.com/garrettladley/garrettladley/pkg/ai/openai"
 	pserver "github.com/garrettladley/garrettladley/pkg/server"
 	"github.com/garrettladley/garrettladley/pkg/xslog"
