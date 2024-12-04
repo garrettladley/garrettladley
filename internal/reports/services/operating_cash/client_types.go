@@ -9,7 +9,7 @@ import (
 
 	"github.com/garrettladley/garrettladley/internal/reports/constants"
 	"github.com/garrettladley/garrettladley/internal/reports/types"
-	"github.com/garrettladley/garrettladley/pkg/utilities"
+	"github.com/garrettladley/garrettladley/pkg/xurl"
 )
 
 type response struct {
@@ -55,7 +55,7 @@ type params struct {
 }
 
 func (p *params) build() (*url.URL, error) {
-	queryParams := utilities.URLValues{}
+	queryParams := xurl.Values{}
 
 	if len(p.Fields) > 0 {
 		queryParams.Add("fields", strings.Join(p.Fields, ","))
