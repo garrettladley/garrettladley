@@ -7,6 +7,7 @@ on:
     paths:
       - cmd/**
       - internal/**
+      - pkg/**
       - .github/workflows/ci.yml
 
 concurrency:
