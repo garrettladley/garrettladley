@@ -1,13 +1,13 @@
 package server
 
 import (
-	"github.com/garrettladley/garrettladley/pkg/ai/openai"
+	"github.com/garrettladley/garrettladley/pkg/ai"
 	"github.com/garrettladley/garrettladley/pkg/server"
 	"github.com/gofiber/fiber/v2"
 )
 
 type Config struct {
-	Client *openai.Client
+	Client ai.AI
 	Config server.Config
 }
 

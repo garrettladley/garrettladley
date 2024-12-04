@@ -1,4 +1,4 @@
-package openai
+package ai
 
 import (
 	"context"
@@ -9,7 +9,7 @@ import (
 )
 
 func (c *Client) Is(ctx context.Context, n int64, p predicate.Predicate) (bool, error) {
-	resp, err := c.client.Talk(
+	resp, err := c.ai.Talk(
 		ctx,
 		predicate.IntoPrompt(p),
 		strconv.FormatInt(n, 10),

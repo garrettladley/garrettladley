@@ -1,11 +1,15 @@
 package ai
 
 import (
-	"context"
-
-	"github.com/garrettladley/garrettladley/internal/is/predicate"
+	"github.com/garrettladley/garrettladley/pkg/ai"
 )
 
-type AI interface {
-	Is(ctx context.Context, n int64, p predicate.Predicate) (bool, error)
+type Client struct {
+	ai ai.AI
+}
+
+func New(ai ai.AI) *Client {
+	return &Client{
+		ai: ai,
+	}
 }

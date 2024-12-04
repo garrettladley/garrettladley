@@ -1,12 +1,12 @@
 package even
 
 import (
-	"github.com/garrettladley/garrettladley/pkg/ai/openai"
+	"github.com/garrettladley/garrettladley/pkg/ai"
 	"github.com/gofiber/fiber/v2"
 )
 
-func Routes(r fiber.Router, client *openai.Client) {
-	s := newService(client)
+func Routes(r fiber.Router, ai ai.AI) {
+	s := newService(ai)
 
 	r.Route("/even", func(r fiber.Router) {
 		r.Get("/:n", s.Is)
