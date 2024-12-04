@@ -5,28 +5,27 @@ import (
 
 	go_json "github.com/goccy/go-json"
 
-	"github.com/garrettladley/garrettladley/pkg/xerr"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/compress"
 	"github.com/gofiber/fiber/v2/middleware/logger"
+
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/fiber/v2/middleware/requestid"
+
+	"github.com/garrettladley/garrettladley/pkg/xerr"
 )
 
-func Setup() *fiber.App {
-	app := createFiberApp()
-	setupMiddleware(app)
-	setupHealthCheck(app)
-	return app
-}
-
-func createFiberApp() *fiber.App {
-	return fiber.New(fiber.Config{
+func New() *fiber.App {
+	app := fiber.New(fiber.Config{
 		JSONEncoder:       go_json.Marshal,
 		JSONDecoder:       go_json.Unmarshal,
-		ErrorHandler:      xerr.Handler,
+		ErrorHandler:      xerr.ErrorHandler,
 		PassLocalsToViews: true,
 	})
+	setupMiddleware(app)
+	setupHealthCheck(app)
+
+	return app
 }
 
 func setupMiddleware(app *fiber.App) {
