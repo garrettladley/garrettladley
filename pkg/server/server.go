@@ -23,7 +23,7 @@ type Config struct {
 	Logger *slog.Logger
 }
 
-func New(cfg Config) *fiber.App {
+func New(cfg Config, register func(*fiber.App)) *fiber.App {
 	app := fiber.New(fiber.Config{
 		JSONEncoder:       go_json.Marshal,
 		JSONDecoder:       go_json.Unmarshal,
@@ -34,6 +34,7 @@ func New(cfg Config) *fiber.App {
 	setupHealthCheck(app)
 	setupRobotsTxt(app)
 	setupSiteMap(app)
+	register(app)
 	setup404Handler(app)
 
 	return app

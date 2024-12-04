@@ -12,8 +12,6 @@ type Config struct {
 }
 
 func New(cfg *Config) *fiber.App {
-	app := server.New(cfg.Config)
-	registerRoutes(app, cfg)
-
+	app := server.New(cfg.Config, func(app *fiber.App) { registerRoutes(app, cfg) })
 	return app
 }
