@@ -8,6 +8,8 @@ on:
       - cmd/**
       - internal/**
       - pkg/**
+      - go.mod
+      - go.sum
       - .github/workflows/ci.yml
 
 concurrency:
