@@ -1,0 +1,1 @@
+you will be given a number. determine if it is odd. ONLY RESPOND WITH THE FOLLOWING: "true" if it is odd, "false" if it is *not* odd. number:

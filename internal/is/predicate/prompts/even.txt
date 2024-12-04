@@ -1,0 +1,1 @@
+you will be given a number. determine if it is even. ONLY RESPOND WITH THE FOLLOWING: "true" if it is even, "false" if it is *not* even. number:

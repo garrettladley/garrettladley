@@ -6,6 +6,7 @@ import (
 	"log/slog"
 	"net/http"
 
+	"github.com/garrettladley/garrettladley/pkg/xslog"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -60,7 +61,14 @@ func ErrorHandler(c *fiber.Ctx, err error) error {
 		apiErr = InternalServerError()
 	}
 
-	slog.Error("HTTP API error", "err", err.Error(), "method", c.Method(), "path", c.Path())
+	slog.LogAttrs(
+		c.Context(),
+		slog.LevelError,
+		"HTTP API error",
+		xslog.Error(err),
+		slog.String("method", c.Method()),
+		slog.String("path", c.Path()),
+	)
 
 	return c.Status(apiErr.StatusCode).JSON(apiErr)
 }

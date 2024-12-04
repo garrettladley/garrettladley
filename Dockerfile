@@ -1,15 +1,14 @@
-FROM golang:1.22-alpine as builder
+FROM golang:1.23-alpine as builder
 
 WORKDIR /app
-RUN apk add --no-cache make nodejs npm git
+RUN apk add --no-cache git ca-certificates
 
-COPY . ./
-RUN make install
-RUN make build-prod
+COPY ./ /app/
+RUN  go build -tags prod -o bin/garrettladley cmd/server/main.go
 
 FROM scratch
+COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=builder /app/bin/garrettladley /garrettladley
-COPY --from=builder /app/config/ /config/
-ENV APP_ENVIRONMENT production
 
+EXPOSE 8080
 ENTRYPOINT [ "./garrettladley" ]
