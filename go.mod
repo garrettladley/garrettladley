@@ -6,6 +6,8 @@ require github.com/gofiber/fiber/v2 v2.52.5
 
 require (
 	github.com/andybalholm/cascadia v1.3.2 // indirect
+	github.com/philhofer/fwd v1.1.2 // indirect
+	github.com/tinylib/msgp v1.1.8 // indirect
 	go.opentelemetry.io/otel v1.29.0 // indirect
 	go.opentelemetry.io/otel/trace v1.29.0 // indirect
 	golang.org/x/net v0.30.0 // indirect
