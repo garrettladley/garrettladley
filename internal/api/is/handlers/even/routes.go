@@ -6,7 +6,7 @@ import (
 )
 
 func Routes(r fiber.Router, ai ai.AI) {
-	s := newService(ai)
+	s := New(ai)
 
 	r.Route("/even", func(r fiber.Router) {
 		r.Get("/:n", s.Is)

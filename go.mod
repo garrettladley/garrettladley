@@ -15,7 +15,7 @@ require (
 
 require (
 	github.com/PuerkitoBio/goquery v1.9.2
-	github.com/a-h/templ v0.2.778
+	github.com/a-h/templ v0.2.793
 	github.com/andybalholm/brotli v1.1.0 // indirect
 	github.com/caarlos0/env/v11 v11.2.2
 	github.com/goccy/go-json v0.10.3

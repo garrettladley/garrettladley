@@ -1,0 +1,49 @@
+package layouts
+
+templ Base() {
+	<!DOCTYPE html>
+	<html lang="en" data-theme="dark">
+		<head>
+			<title>garrettladley</title>
+			<link rel="stylesheet" href="/public/styles.css"/>
+			<link rel="icon" href="data:,"/>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
+			<meta name="description" content="Garrett Ladley"/>
+			<meta name="keywords" content="garrett ladley, garrett, ladley, go, golang, rust"/>
+			<meta name="author" content="Garrett Ladley"/>
+		</head>
+		<body>
+			<div class="antialiased min-h-screen bg-navy-dark text-cream font-mono">
+				<header>
+					<nav class="flex justify-end p-4">
+						<ul class="flex space-x-4">
+							<li>
+								<a
+									href="/blog"
+									class="hover:underline hover:text-blue-300 transition-colors text-lg"
+								>
+									blog
+								</a>
+							</li>
+							<li>
+								<a
+									href="/projects"
+									class="hover:underline hover:text-blue-300 transition-colors text-lg"
+								>
+									projects
+								</a>
+							</li>
+						</ul>
+					</nav>
+				</header>
+				<main
+					id="content"
+					class="flex-1"
+				>
+					{ children... }
+				</main>
+			</div>
+		</body>
+	</html>
+}

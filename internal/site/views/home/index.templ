@@ -1,0 +1,59 @@
+package home
+
+import (
+	"github.com/garrettladley/garrettladley/internal/site/views/icons"
+	"github.com/garrettladley/garrettladley/internal/site/views/layouts"
+	"strings"
+)
+
+var socials = [...]struct {
+	href string
+	icon templ.Component
+}{
+	{href: "https://x.com/GarrettLadley", icon: icons.Twitter()},
+	{href: "https://github.com/garrettladley", icon: icons.GitHub()},
+	{href: "https://linkedin.com/garrettladley", icon: icons.LinkedIn()},
+}
+
+templ Index() {
+	@layouts.Base() {
+		<div class="h-[80vh] flex flex-col justify-center items-center text-center">
+			<pre class="text-center text-xl mb-8 whitespace-pre-wrap">
+				{ centeredASCIIBox("garrettladley", 8, 2) }
+			</pre>
+			<h2 class="mb-4">
+				Software Engineer building products and distributed systems in Go and Rust
+			</h2>
+			<footer class="flex space-x-6">
+				for _, social := range socials {
+					<a
+						href={ templ.SafeURL(social.href) }
+						target="_blank"
+						rel="noopener noreferrer"
+						class="hover:text-blue-300 transition-colors flex items-center justify-center"
+					>
+						@social.icon
+					</a>
+				}
+			</footer>
+		</div>
+	}
+}
+
+func centeredASCIIBox(content string, px uint, py uint) string {
+	var (
+		contentWidth = len(content)
+		totalWidth   = contentWidth + (int(px) * 2)
+		builder      strings.Builder
+	)
+	builder.WriteString("+" + strings.Repeat("-", totalWidth) + "+\n")
+	for i := uint(0); i < py; i++ {
+		builder.WriteString("|" + strings.Repeat(" ", totalWidth) + "|\n")
+	}
+	builder.WriteString("|" + strings.Repeat(" ", int(px)) + content + strings.Repeat(" ", int(px)) + "|\n")
+	for i := uint(0); i < py; i++ {
+		builder.WriteString("|" + strings.Repeat(" ", totalWidth) + "|\n")
+	}
+	builder.WriteString("+" + strings.Repeat("-", totalWidth) + "+")
+	return builder.String()
+}

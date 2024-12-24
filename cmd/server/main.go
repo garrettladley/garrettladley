@@ -7,11 +7,12 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/garrettladley/garrettladley/internal/api/is/server"
-	"github.com/garrettladley/garrettladley/internal/api/is/settings"
-	"github.com/garrettladley/garrettladley/pkg/ai/openai"
-	pserver "github.com/garrettladley/garrettladley/pkg/server"
+	"github.com/garrettladley/garrettladley/internal/api/is/conf"
+	sserver "github.com/garrettladley/garrettladley/internal/site/server"
+	"github.com/garrettladley/garrettladley/pkg/server"
 	"github.com/garrettladley/garrettladley/pkg/xslog"
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/adaptor"
 )
 
 func main() {
@@ -23,7 +24,7 @@ func main() {
 
 	ctx, cancel := context.WithCancel(context.Background())
 
-	settings, err := settings.Load()
+	_, err := conf.Load()
 	if err != nil {
 		slog.LogAttrs(
 			ctx,
@@ -34,11 +35,11 @@ func main() {
 		os.Exit(1)
 	}
 
-	app := server.New(&server.Config{
-		Client: openai.New(settings.AI.Key),
-		Config: pserver.Config{
+	app := sserver.New(&sserver.Config{
+		Config: server.Config{
 			Logger: logger,
 		},
+		StaticFn: static,
 	})
 
 	go func() {
@@ -78,4 +79,8 @@ func main() {
 		slog.LevelInfo,
 		"server shutdown",
 	)
+}
+
+func static(app *fiber.App) {
+	app.Get("/public/*", adaptor.HTTPHandler(public()))
 }

@@ -9,7 +9,7 @@ type Service struct {
 	client *is.Client
 }
 
-func newService(ai ai.AI) *Service {
+func New(ai ai.AI) *Service {
 	return &Service{
 		client: is.New(ai),
 	}
