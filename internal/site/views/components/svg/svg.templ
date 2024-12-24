@@ -1,0 +1,18 @@
+package svg
+
+templ SVG(opts ...Option) {
+	{{ cfg := Apply(opts...) }}
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		width={ cfg.Width }
+		height={ cfg.Height }
+		viewBox={ "0 0 " + cfg.Width + " " + cfg.Height }
+		fill={ cfg.Fill }
+		stroke={ cfg.Stroke }
+		stroke-width={ cfg.StrokeWidth }
+		stroke-linecap={ cfg.StrokeLineCap }
+		stroke-linejoin={ cfg.StrokeLineJoin }
+	>
+		{ children... }
+	</svg>
+}

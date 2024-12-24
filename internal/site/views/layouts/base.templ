@@ -1,6 +1,9 @@
 package layouts
 
-import "github.com/garrettladley/garrettladley/internal/site/views/icons"
+import (
+	"github.com/garrettladley/garrettladley/internal/site/views/components/svg"
+	"github.com/garrettladley/garrettladley/internal/site/views/icons"
+)
 
 templ Base() {
 	<!DOCTYPE html>
@@ -23,7 +26,7 @@ templ Base() {
 							<li>
 								<a
 									href="/blog"
-									class="hover:underline hover:text-blue-300 transition-colors text-lg"
+									class="hover:text-blue-300 transition-colors text-lg"
 								>
 									blog
 								</a>
@@ -31,7 +34,7 @@ templ Base() {
 							<li>
 								<a
 									href="/projects"
-									class="hover:underline hover:text-blue-300 transition-colors text-lg"
+									class="hover:text-blue-300 transition-colors text-lg"
 								>
 									projects
 								</a>
@@ -46,9 +49,10 @@ templ Base() {
 					{ children... }
 				</main>
 				<footer class="flex justify-center items-center text-center space-x-4">
-					@footerIcon("https://x.com/GarrettLadley", icons.Twitter(icons.WithStrokeWidth(1)))
-					@footerIcon("https://github.com/garrettladley", icons.GitHub(icons.WithStrokeWidth(1)))
-					@footerIcon("https://linkedin.com/in/garrettladley", icons.LinkedIn(icons.WithStrokeWidth(1)))
+					{{ opts := []svg.Option{svg.StrokeWidth(1)} }}
+					@footerIcon("https://x.com/GarrettLadley", icons.Twitter(opts...))
+					@footerIcon("https://github.com/garrettladley", icons.GitHub(opts...))
+					@footerIcon("https://linkedin.com/in/garrettladley", icons.LinkedIn(opts...))
 				</footer>
 			</div>
 		</body>
