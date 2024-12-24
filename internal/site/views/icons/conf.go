@@ -34,11 +34,19 @@ var DefaultConfig = Config{
 	StrokeWidth: "2",
 }
 
-func Apply(opts ...Option) Config {
-	c := DefaultConfig
-
+func Apply(opts ...Option) (c Config) {
 	for _, opt := range opts {
 		opt(&c)
+	}
+
+	if c.Height == "" {
+		c.Height = DefaultConfig.Height
+	}
+	if c.Width == "" {
+		c.Width = DefaultConfig.Width
+	}
+	if c.StrokeWidth == "" {
+		c.StrokeWidth = DefaultConfig.StrokeWidth
 	}
 
 	return c
