@@ -71,6 +71,6 @@ watch/templ:
 
 ## ci/scaffold: scaffold the project
 .PHONY: ci/scaffold
-ci/scaffold:
+ci/scaffold: gen/templ
 	@mkdir -p cmd/server/public
 	@echo "hello world" > cmd/server/public/hello.txt
