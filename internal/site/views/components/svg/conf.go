@@ -28,8 +28,9 @@ func Width(w uint64) Option {
 
 func Square(s uint64) Option {
 	return func(c *Config) {
-		c.Height = strconv.FormatUint(s, 10)
-		c.Width = strconv.FormatUint(s, 10)
+		sq := strconv.FormatUint(s, 10)
+		c.Height = sq
+		c.Width = sq
 	}
 }
 
