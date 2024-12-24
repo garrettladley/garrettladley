@@ -3,20 +3,6 @@ package icons
 import "strconv"
 
 type Config struct {
-	Height      uint
-	Width       uint
-	StrokeWidth uint
-}
-
-func (c Config) Into() StrConfig {
-	return StrConfig{
-		Height:      strconv.FormatUint(uint64(c.Height), 10),
-		Width:       strconv.FormatUint(uint64(c.Width), 10),
-		StrokeWidth: strconv.FormatUint(uint64(c.StrokeWidth), 10),
-	}
-}
-
-type StrConfig struct {
 	Height      string
 	Width       string
 	StrokeWidth string
@@ -24,36 +10,36 @@ type StrConfig struct {
 
 type Option func(*Config)
 
-func WithHeight(h uint) Option {
+func WithHeight(h uint64) Option {
 	return func(c *Config) {
-		c.Height = h
+		c.Height = strconv.FormatUint(h, 10)
 	}
 }
 
-func WithWidth(w uint) Option {
+func WithWidth(w uint64) Option {
 	return func(c *Config) {
-		c.Width = w
+		c.Width = strconv.FormatUint(w, 10)
 	}
 }
 
-func WithStrokeWidth(sw uint) Option {
+func WithStrokeWidth(sw uint64) Option {
 	return func(c *Config) {
-		c.StrokeWidth = sw
+		c.StrokeWidth = strconv.FormatUint(sw, 10)
 	}
 }
 
 var DefaultConfig = Config{
-	Height:      24,
-	Width:       24,
-	StrokeWidth: 2,
+	Height:      "24",
+	Width:       "24",
+	StrokeWidth: "2",
 }
 
-func Apply(opts ...Option) StrConfig {
+func Apply(opts ...Option) Config {
 	c := DefaultConfig
 
 	for _, opt := range opts {
 		opt(&c)
 	}
 
-	return c.Into()
+	return c
 }
