@@ -49,7 +49,7 @@ templ Base() {
 					{ children... }
 				</main>
 				<footer class="flex justify-center items-center text-center space-x-4">
-					{{ opts := []svg.Option{svg.StrokeWidth(1)} }}
+					{{ opts := []svg.Option{svg.Square(24), svg.StrokeWidth(1)} }}
 					@footerIcon("https://x.com/GarrettLadley", icons.Twitter(opts...))
 					@footerIcon("https://github.com/garrettladley", icons.GitHub(opts...))
 					@footerIcon("https://linkedin.com/in/garrettladley", icons.LinkedIn(opts...))
