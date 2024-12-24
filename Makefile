@@ -28,8 +28,9 @@ run: build
 ## install: install dependencies
 .PHONY: install
 install:
-	@make install/go
 	@make install/templ
+	@make gen/templ
+	@make install/go
 	@make install/css
 
 ## install/go: install go dependencies
@@ -71,6 +72,6 @@ watch/templ:
 
 ## ci/scaffold: scaffold the project
 .PHONY: ci/scaffold
-ci/scaffold: gen/templ
+ci/scaffold:
 	@mkdir -p cmd/server/public
 	@echo "hello world" > cmd/server/public/hello.txt
