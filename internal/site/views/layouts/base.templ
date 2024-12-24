@@ -1,5 +1,7 @@
 package layouts
 
+import "github.com/garrettladley/garrettladley/internal/site/views/icons"
+
 templ Base() {
 	<!DOCTYPE html>
 	<html lang="en" data-theme="dark">
@@ -43,7 +45,24 @@ templ Base() {
 				>
 					{ children... }
 				</main>
+				<footer class="flex justify-center items-center text-center space-x-4">
+					@footerIcon("https://x.com/GarrettLadley", icons.Twitter(icons.WithStrokeWidth(1)))
+					@footerIcon("https://github.com/garrettladley", icons.GitHub(icons.WithStrokeWidth(1)))
+					@footerIcon("https://linkedin.com/in/garrettladley", icons.LinkedIn(icons.WithStrokeWidth(1)))
+				</footer>
 			</div>
 		</body>
 	</html>
+}
+
+templ footerIcon(href string, icon templ.Component) {
+	<a
+		href={ templ.SafeURL(href) }
+		target="_blank"
+		target="_blank"
+		rel="noopener noreferrer"
+		class="hover:text-blue-300 transition-colors flex items-center justify-center"
+	>
+		@icon
+	</a>
 }

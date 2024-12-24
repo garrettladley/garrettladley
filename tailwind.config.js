@@ -2,7 +2,14 @@
 export default {
   content: ["./**/*.html", "./**/*.templ", "./**/*.go",],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        midnight: '#040b26',
+      },
+      fontFamily: {
+        mono: ['Courier New', 'Courier', 'monospace'],
+      },
+    },
   },
   plugins: [],
 };
